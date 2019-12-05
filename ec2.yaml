@@ -1,0 +1,8 @@
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: ami-00d042f59a75c06e7
+      InstanceType: t2.small
+      KeyName: aws
+      SubnetId: subnet-03fc0d1a42071e17e
