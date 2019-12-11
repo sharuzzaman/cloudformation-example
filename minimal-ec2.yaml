@@ -1,0 +1,6 @@
+# this template will only work in account that have support for EC2-Classic
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: ami-00d042f59a75c06e7
