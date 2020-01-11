@@ -1,0 +1,56 @@
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: ami-00d042f59a75c06e7
+      InstanceType: t2.small
+      KeyName: aws
+      SubnetId: subnet-03fc0d1a42071e17e
+      SecurityGroupIds:
+        - !Ref Port9090and22SecurityGroup
+      UserData:
+        Fn::Base64:
+          !Sub |
+            Content-Type: multipart/mixed; boundary="===============2058563629534045697=="
+            MIME-Version: 1.0
+
+            --===============2058563629534045697==
+            Content-Type: text/text/cloud-config; charset="utf-8"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: base64
+            Content-Disposition: attachment; filename="cloudconfig"
+
+            I2Nsb3VkLWNvbmZpZwpjaHBhc3N3ZDoKICBsaXN0OiB8CiAgICAgcm9vdDphbHBoYWJyYXZvY2hh
+            cmxpZQogIGV4cGlyZTogRmFsc2UgICAK
+
+            --===============2058563629534045697==
+            Content-Type: text/text/x-shellscript; charset="utf-8"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: base64
+            Content-Disposition: attachment; filename="userdata"
+
+            IyEvYmluL2Jhc2ggLXhlCnl1bSAteSBpbnN0YWxsIGNvY2twaXQgZmlyZXdhbGxkCmZpcmV3YWxs
+            LW9mZmxpbmUtY21kIC0tYWRkLXNlcnZpY2U9Y29ja3BpdApzeXN0ZW1jdGwgcmVzdGFydCBmaXJl
+            d2FsbGQKc3lzdGVtY3RsIHN0YXR1cyBmaXJld2FsbGQgLWwKc3lzdGVtY3RsIGVuYWJsZSBmaXJl
+            d2FsbGQKc3lzdGVtY3RsIHN0YXJ0IGNvY2twaXQuc29ja2V0CnN5c3RlbWN0bCBlbmFibGUgY29j
+            a3BpdC5zb2NrZXQK
+
+            --===============2058563629534045697==--
+
+  Port9090and22SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: "Port 9090"
+      SecurityGroupIngress: 
+        -  CidrIp: "0.0.0.0/0"
+           FromPort: 9090
+           IpProtocol: tcp
+           ToPort: 9090
+        -  CidrIp: "0.0.0.0/0"
+           FromPort: 22
+           IpProtocol: tcp
+           ToPort: 22
+      VpcId: vpc-008255735de29c3d4
+
+#refer additional file shellscript.txt and cloudconfig.txt for the content of the above MIME multipart above
+#also look for a Python script that will help you to generate the MIME multipart content

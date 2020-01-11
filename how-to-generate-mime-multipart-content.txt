@@ -1,0 +1,17 @@
+How to change root password?
+- Edit the file cloudconfig.txt
+- The password is after the ":" for the root username
+- It has to be in plaintext
+
+How to edit the command executed during EC2 instance startup?
+- Edit the file shellscript.txt
+- Add or remove the commands
+- Each line is a single command
+
+How to generate MIME multipart content for EC2 UserData?
+
+- Run the following command:
+
+mime-multipart.py cloudconfig.txt:text/cloud-config shellscript.txt:text/x-shellscript
+
+- Then copy the output to the UserData section of the CloudFormation template, replacing the current MIME multipart content

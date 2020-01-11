@@ -1,0 +1,8 @@
+#!/bin/bash -xe
+yum -y install cockpit firewalld
+firewall-offline-cmd --add-service=cockpit
+systemctl restart firewalld
+systemctl status firewalld -l
+systemctl enable firewalld
+systemctl start cockpit.socket
+systemctl enable cockpit.socket
